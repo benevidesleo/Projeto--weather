@@ -7,6 +7,8 @@ document.querySelector('.busca').addEventListener('submit', (event)=> {
     if( input !== ''){
         showWarning('carrregando...')
     }
+
+    let linkApi = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(input)}&appid={API key}`
 })
 
 function showWarning(msg) { 
