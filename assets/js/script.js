@@ -3,6 +3,7 @@ document.querySelector('.busca').addEventListener('submit', async (event) => {
 
     let input = document.querySelector('#searchInput').value
     if (input !== '') {
+        clearInfo()
         showWarning('carrregando...')
 
         let linkApi = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(input)}&appid=1275d595554ed510da2bb24f01a50a46&units=metric&lang=pt_br`
@@ -20,6 +21,7 @@ document.querySelector('.busca').addEventListener('submit', async (event) => {
                 windAngle: json.wind.deg
             })
         } else {
+            clearInfo()
             showWarning('Não encontramos esta cidade!')
         }
     }
@@ -36,6 +38,7 @@ function showInfo(json){
     document.querySelector('.tempInfo').innerHTML = `${json.temp} <sup>ºC</sup>`
     document.querySelector('.ventoInfo').innerHTML = `${json.windSpeed} <span>km/h</span>`
     document.querySelector('.temp img').setAttribute('src', `http://openweathermap.org/img/wn/${json.tempIcon}@2x.png`)
+    document.querySelector('.ventoPonto').style.transform = `rotate(${json.windAngle - 90}deg)`
 }
 
 
@@ -43,6 +46,10 @@ function showWarning(msg) {
     document.querySelector('.aviso').innerHTML = msg
 }
 
+function clearInfo() { 
+    showWarning('')
+    document.querySelector('.resultado').style.display = 'none'
+}
 
 
 
